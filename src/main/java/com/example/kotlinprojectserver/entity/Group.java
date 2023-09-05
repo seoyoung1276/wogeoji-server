@@ -19,13 +19,13 @@ public class Group {
     @Column(name = "group_id")
     private Long groupId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "headcount_limit", nullable = false)
+    @Column(name = "headcount_limit")
     private Integer headcountLimit;
 
     @ManyToMany(mappedBy = "groups")
