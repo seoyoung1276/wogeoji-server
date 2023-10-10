@@ -29,12 +29,12 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public Member updateMember(Long memberId, Member updatedMember) {
-        if (memberRepository.existsById(memberId)) {
-            updatedMember.setMemberId(memberId);
+    public Member updateMember(Long memberNo, Member updatedMember) {
+        if (memberRepository.existsById(memberNo)) {
+            updatedMember.setMemberNo(memberNo);
             return memberRepository.save(updatedMember);
         } else {
-            throw new RuntimeException("Member not found with ID: " + memberId);
+            throw new RuntimeException("Member not found with ID: " + memberNo);
         }
     }
 
