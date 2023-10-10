@@ -14,14 +14,14 @@ import java.util.Set;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long memberId; //pk
+    @Column(name = "member_no")
+    private Long memberNo; //pk
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "id")
-    private String id;
+    @Column(name = "member_id")
+    private String memberId;
 
     @Column(name = "pw")
     private String password;
