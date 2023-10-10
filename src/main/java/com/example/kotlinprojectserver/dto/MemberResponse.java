@@ -5,16 +5,16 @@ import lombok.Getter;
 
 @Getter
 public class MemberResponse {
-    private final Long memberId;
+    private final Long memberNo;
     private final String name;
-    private final String id;
+    private final String memberId;
     private final String password;
     private final String email;
 
     public MemberResponse(Member member) {
-        this.memberId = getMemberId();
+        this.memberNo = getMemberNo();
         this.name = member.getName();
-        this.id = member.getId();
+        this.memberId = member.getMemberId();
         this.password = member.getPassword();
         this.email = member.getEmail();
     }
