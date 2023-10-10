@@ -13,9 +13,6 @@ public class BlogService {
 
     private final BlogRepository blogRepository;
 
-    public BlogService(BlogRepository blogRepository) {
-        this.blogRepository = blogRepository;
-    }
 
     public Article save(AddArticleRequest request){
         return blogRepository.save(request.toEntity());
