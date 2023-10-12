@@ -1,6 +1,8 @@
 package com.example.kotlinprojectserver.controller;
 import com.example.kotlinprojectserver.dto.MemberResponse;
+import com.example.kotlinprojectserver.entity.Group;
 import com.example.kotlinprojectserver.entity.Member;
+import com.example.kotlinprojectserver.service.GroupService;
 import com.example.kotlinprojectserver.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,12 @@ import java.util.Optional;
 @RequestMapping("/members")
 public class MemberController {
     private final MemberService memberService;
+    private final GroupService groupService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, GroupService groupService) {
         this.memberService = memberService;
+        this.groupService = groupService;
     }
 
     @GetMapping("/")
@@ -30,8 +34,13 @@ public class MemberController {
     }
 
     @GetMapping("/{memberId}")
-    public Optional<Member> getMemberById(@PathVariable Long memberId) {
-        return memberService.getMemberById(memberId);
+    public ResponseEntity<MemberResponse> getMemberById(@PathVariable Long memberId) {
+        Member member = memberService.getMemberById(memberId);
+        if (member != null) {
+            MemberResponse memberResponse = new MemberResponse(member);
+            return ResponseEntity.ok().body(memberResponse);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/member")
@@ -49,4 +58,23 @@ public class MemberController {
     public void deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
     }
+
+    @PostMapping("/{memberId}/join/{groupId}")
+    public ResponseEntity<String> joinGroup(
+            @PathVariable Long memberId,
+            @PathVariable Long groupId
+    ) {
+        Member member = memberService.getMemberById(memberId);
+        Group group = groupService.getGroupById(groupId);
+
+        if (member != null && group != null) {
+            // Associate the member with the group
+            member.getGroups().add(group);
+            memberService.saveMember(member);
+            return ResponseEntity.ok("Member has joined the group.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
