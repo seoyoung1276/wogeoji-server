@@ -12,6 +12,10 @@ import org.springframework.web.ErrorResponse;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
 
+    // TODO: 게시물을 쓴 member의 아이디 연관관계 매핑
+    // TODO: 게시물이 속한 그룹의 아이디 연관관계 매핑
+    // Spring ManyToOne 이나 OneToMany 검색하면 많이 나오고 내가 만든 entity에도 있음
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
