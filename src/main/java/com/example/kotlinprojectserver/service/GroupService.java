@@ -21,8 +21,8 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-    public Optional<Group> getGroupById(Long groupId) {
-        return groupRepository.findById(groupId);
+    public Group getGroupById(Long groupId) {
+        return groupRepository.findById(groupId).orElse(null);
     }
 
     public Group createGroup(Group group) {
