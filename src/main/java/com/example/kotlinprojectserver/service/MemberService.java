@@ -21,8 +21,8 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Optional<Member> getMemberById(Long memberId) {
-        return memberRepository.findById(memberId);
+    public Member getMemberById(Long memberId) {
+        return memberRepository.findById(memberId).orElse(null);
     }
 
     public Member createMember(Member member) {
@@ -40,5 +40,9 @@ public class MemberService {
 
     public void deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
+    }
+
+    public Member saveMember(Member member) {
+        return memberRepository.save(member);
     }
 }
