@@ -1,9 +1,11 @@
 package com.example.kotlinprojectserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Set;
 
@@ -11,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,7 @@ public class Member {
     private String email;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
         name = "user_group",
         joinColumns = @JoinColumn(name = "user_id"),
