@@ -24,13 +24,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Optional<Member>> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Member> login(@RequestBody LoginRequest loginRequest) {
         Optional<Member> member = memberRepository.findByMemberIdAndPassword(loginRequest.getMemberId(), loginRequest.getPassword());
 
         if (member.isPresent()) {
             System.out.println(1);
-            System.out.println(member);
-            return ResponseEntity.ok(member);
+            System.out.println(member.get());
+            return ResponseEntity.status(HttpStatus.OK).body(member.get());
         } else {
             System.out.println(0);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
