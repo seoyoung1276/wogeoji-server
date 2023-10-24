@@ -7,14 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.web.ErrorResponse;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
-
-    // TODO: 게시물을 쓴 member의 아이디 연관관계 매핑
-    // TODO: 게시물이 속한 그룹의 아이디 연관관계 매핑
-    // Spring ManyToOne 이나 OneToMany 검색하면 많이 나오고 내가 만든 entity에도 있음
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +26,30 @@ public class Article {
     @Column(name = "content", nullable = false)
     private String content;
 
+    private Integer cost;
+
+    @ManyToOne
+    private Member author; // 게시물을 작성한 회원
+
+    @ManyToOne
+    private Group group; // 게시물이 속한 그룹
+
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comments;
+
+
     @Builder
-    public Article(String title, String content){
+    public Article(String title, String content, Integer cost, Member author, Group group, List<Comment> comments){
         this.title = title;
         this.content = content;
+        this.cost = cost;
+        this.author = author;
+        this.group = group;
+        this.comments = comments;
     }
+
+
+
 
 
 }
