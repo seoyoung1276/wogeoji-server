@@ -29,13 +29,17 @@ public class GroupService {
         return groupRepository.save(group);
     }
 
-    public Group updateGroup(Long groupId, Group updateGroup) {
-        if (groupRepository.existsById(groupId)) {
-            updateGroup.setGroupId(groupId);
+    public Group updateGroup(Long groupNo, Group updateGroup) {
+        if (groupRepository.existsById(groupNo)) {
+            updateGroup.setGroupNo(groupNo);
             return groupRepository.save(updateGroup);
         } else {
-            throw new RuntimeException("Group not found with ID: " + groupId);
+            throw new RuntimeException("Group not found with ID: " + groupNo);
         }
+    }
+
+    public void saveGroup(Group group) {
+        groupRepository.save(group);
     }
 
     public void deleteGroup(Long groupId) {
