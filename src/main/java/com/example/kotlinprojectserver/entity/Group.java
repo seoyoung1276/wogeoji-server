@@ -16,8 +16,10 @@ import java.util.Set;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_id")
-    private Long groupId;
+    @Column(name = "group_no")
+    private Long groupNo;
+
+
 
     @Column(name = "name")
     private String name;
